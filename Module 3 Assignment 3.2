@@ -1,0 +1,37 @@
+# ***********************************************
+# * Name:   Basic Statistics in Python
+# * Date:   August 12, 2022
+# * Author: Brad D. Messner
+# * Desc:   Importing a file and calculating basic
+# *         descriptive analytics.
+# ***********************************************
+
+# Import external code that we will be using to perform our basic calculations
+import pandas as pd
+import statistics
+import numpy as np
+
+# Import data from an external website
+df = pd.read_csv("https://raw.githubusercontent.com/bradmessner/SDT500-Business-Analytics/main/MELBOURNE_HOUSE_PRICES_LESS.csv")
+df.info()           # outputs the basic info about my data
+
+# Drop any values where the Price column is empty
+df = df.dropna(subset=['Price'])
+myData = df['Price'].tolist()
+
+# Output a header and then calculate basic statistics
+print("\n\n")
+print("Descriptive Statistics")
+print("======================")
+print("Count is:  ", len(myData))
+print("Mean is:   ", statistics.mean(myData))
+print("Median is: ", statistics.median(myData))
+print("Mode is:   ", statistics.mode(myData))
+print("Min is:    ", min(myData))
+print("Max is:    ", max(myData))
+print("Range is:  ", max(myData)-min(myData))
+print("St Dev is: ", statistics.stdev(myData))
+print("Variance:  ", statistics.variance(myData))
+print("Lower Q:   ", np.percentile(myData, 25))
+print("Upper Q:   ", np.percentile(myData, 75))
+print("Inter Q R: ", np.percentile(myData, 75) - np.percentile(myData, 25))
